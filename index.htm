@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Code editor</title>
+    <link rel="stylesheet" href="w3.css">
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="autocomplete.css">
+</head>
+
+<body>
+    <div class="w3-block w3-center cambria w3-teal w3-card-2 w3-xlarge w3-padding w3-margin-bottom"> <i
+            class="fas fa-code"></i> Code editor</div>
+    <form autocomplete="off" method="post">
+        <div class="w3-row-padding flex">
+            <div class="w3-col s12 m6" id="one" style="position: relative;">
+                <!--autocomplete-->
+                <div class="autocomplete" style="display: none;"></div>
+                <div class="w3-card-2">
+                    <div class="w3-center cambria w3-block w3-teal w3-padding w3-large"> <i class="fas fa-edit"></i>
+                        Coding</div>
+                    <textarea class="w3-block w3-padding" name="text" id="textarea"><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+</head>
+<body>
+    
+</body>
+</html></textarea>
+                </div>
+            </div>
+            <div class="w3-col s12 m6" id="two">
+                <div class="w3-card-2">
+                    <div class="w3-center cambria w3-block w3-teal w3-padding w3-large"> <i class="fas fa-tv"></i>
+                        Output</div>
+                    <iframe class="w3-block"></iframe>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/split.js/1.5.11/split.min.js"></script>
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <script src="jquery-3.4.1.js"></script>
+    <script src="autocomplete.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            var tagNames = ["a","abbr","applet","aside","audio","address","article","b","body","button","canvas","caption","center","code","div","dd","dt","del","em","embed","fieldset","footer","form","figure","font","frame","h1","h2","h3","h4","h5","h6","head","header","html","i","iframe","label","li","main","map","marquee","nav","ol","object","optgroup","option","p","pre","select","section","script","small","sub","sup","style","source","strong","table","thead","tr","td","title","textarea","ul","video"];
+            autocomplete(document.getElementById("textarea"), tagNames);
+
+            Split(['#one', '#two'], {
+                elementStyle: (dimension, size, gutterSize) => ({
+                    'flex-basis': `calc(${size}% - ${gutterSize}px)`,
+                }),
+                gutterStyle: (dimension, gutterSize) => ({
+                    'flex-basis': `${gutterSize}px`,
+                }),
+            });
+
+            $('#textarea').keyup(function (e) {
+                $.ajax({
+                    url: "result.php",
+                    method: "post",
+                    data: $('form').serialize(),
+                    dataType: "text",
+                    success: function () {
+                        document.querySelector('iframe').src = 'new.htm';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

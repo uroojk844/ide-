@@ -1,0 +1,35 @@
+html,body{
+    margin: 0;
+    padding: 0;
+    background-color: wheat;
+}
+
+*{outline: none;}
+
+.cambria{
+    font-family: monospace;
+}
+
+#textarea, iframe{
+    height: 534px;
+    resize: none;
+    border: 0.5px solid #ddd;
+    background-color: white;
+}
+
+#textarea{
+    letter-spacing: 1px;
+    font-family: Monospace;
+}
+
+.split{
+    width: 50%;
+}
+
+.flex {
+    display: flex;
+    flex-direction: row;
+}
+.gutter.gutter-horizontal {
+    cursor: ew-resize;
+}
